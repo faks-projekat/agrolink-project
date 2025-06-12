@@ -1,0 +1,350 @@
+\documentclass[a4paper,12pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{csquotes}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{float}
+
+% Define colors
+\definecolor{primarycolor}{RGB}{39, 74, 93} % Professional blue
+\definecolor{secondarycolor}{RGB}{80, 137, 87} % Subtle green
+
+% Title formatting
+\titleformat{\section}{\color{primarycolor}\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\color{secondarycolor}\large\bfseries}{\thesubsection}{1em}{}
+
+% Hyperref settings
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primarycolor,
+    urlcolor=secondarycolor,
+    citecolor=secondarycolor
+}
+
+% Document information
+\title{{\color{primarycolor}\Huge\textbf{AgroLink}\\[0.5cm]
+\Large Poslovni slučaj za digitalnu platformu AgroLink}}
+\author{Politehnički fakultet\\Univerzitet u Zenici}
+\date{Juni 2025}
+
+\begin{document}
+
+\begin{titlepage}
+    \maketitle
+    \vfill
+    \begin{abstract}
+        \noindent 
+        \textbf{AgroLink} predstavlja inovativnu digitalnu platformu za direktno povezivanje lokalnih 
+        poljoprivrednih proizvođača s krajnjim kupcima na području Zapadnog Balkana. 
+        Cilj projekta je eliminacija nepotrebnih posrednika u lancu opskrbe, povećanje 
+        profitabilnosti za proizvođače i osiguravanje svježih, lokalnih proizvoda po pristupačnijim 
+        cijenama za kupce. Ovaj dokument analizira postojeću tržišnu situaciju, identificira ključne 
+        potrebe stakeholdera, predstavlja detaljnu arhitekturu predloženog rješenja, procjenjuje 
+        komercijalni potencijal i donosi plan implementacije s analizom rizika. Rezultati 
+        analize ukazuju na značajnu priliku za digitalizaciju i optimizaciju regionalnog 
+        poljoprivrednog tržišta, uz potencijal stvaranja održivog poslovnog modela s pozitivnim 
+        društvenim i ekonomskim učinkom.
+    \end{abstract}
+    \vfill
+    \begin{center}
+        \textit{Ključne riječi:} digitalna poljoprivreda, e-tržnica, direktna prodaja, 
+        poljoprivredni lanac vrijednosti, lokalna proizvodnja, ruralni razvoj
+    \end{center}
+\end{titlepage}
+
+\onehalfspacing
+\tableofcontents
+\newpage
+
+% ----------------------------------------------------
+\section{Uvod}
+\label{sec:uvod}
+
+\subsection{Kontekst i pozadina projekta}
+Poljoprivredni sektor u zemljama Zapadnog Balkana suočava se s nekoliko izazova: fragmentirano tržište, nedovoljna digitalizacija, dugi lanci opskrbe i visoke marže posrednika. Dok s jedne strane mali i srednji proizvođači često ne mogu ostvariti adekvatnu cijenu za svoje proizvode, s druge strane urbani potrošači plaćaju visoke cijene za proizvode upitne svježine. 
+
+Prema podacima FAO-a, preko 40\% poljoprivrednih proizvoda u regiji prodaje se kroz najmanje dva posrednička nivoa, što umanjuje zaradu proizvođača za 30-60\%. Istovremeno, istraživanja pokazuju da više od 70\% potrošača u urbanim sredinama preferira lokalno proizvedenu hranu kad im je dostupna, prvenstveno zbog svježine i percepcije zdravije prehrane \cite{FAO2021}.
+
+\subsection{Svrha dokumenta}
+Ovaj dokument predstavlja poslovni slučaj za razvoj digitalne platforme AgroLink koja će adresirati navedene probleme direktnim povezivanjem proizvođača i kupaca. Dokument analizira tržište, identificira ključne funkcionalne zahtjeve, procjenjuje poslovne mogućnosti i predlaže plan implementacije.
+
+% ----------------------------------------------------
+\section{Strateški kontekst}
+\label{sec:strateski-kontekst}
+
+AgroLink projekt doprinosi nekoliko strateških ciljeva:
+
+\begin{enumerate}
+    \item \textbf{Regionalni razvoj} - Podrška održivosti malih i srednjih poljoprivrednih proizvođača u ruralnim područjima regije.
+    \item \textbf{Digitalna transformacija} - Modernizacija tradicionalnog sektora kroz digitalne alate i metode.
+    \item \textbf{Održiva poljoprivreda} - Smanjenje transportnih distanci i poticanje lokalne proizvodnje.
+    \item \textbf{Ekonomska efikasnost} - Optimizacija lanca opskrbe eliminacijom nepotrebnih posrednika.
+\end{enumerate}
+
+Platforma je u skladu s Agendom za održivi razvoj EU i regionalnim strategijama pametne specijalizacije koje ističu poljoprivredu i digitalnu transformaciju kao prioritetna područja.
+
+% ----------------------------------------------------
+\section{Analiza tržišta}
+\label{sec:analiza-trzista}
+
+\subsection{Pregled tržišta}
+
+Poljoprivredni sektor predstavlja značajan dio ekonomije zemalja Zapadnog Balkana, čineći između 7-12\% BDP-a različitih zemalja u regiji i zapošljavajući 15-25\% radne snage. Trenutno stanje digitalizacije u poljoprivrednom sektoru je na niskom nivou, s manje od 20\% poljoprivrednika koji koriste bilo kakve digitalne alate u svom poslovanju \cite{WorldBank2022}.
+
+\subsection{Analiza konkurentskih rješenja}
+
+Pregled postojećih rješenja na tržištu pokazuje određeni broj lokalnih inicijativa, ali s ograničenim dometom, funkcionalnostima ili geografskom pokrivenošću. Tabela \ref{table:konkurencija} prikazuje ključne konkurentske platforme u regiji.
+
+\begin{table}[H]
+\centering
+\caption{Pregled konkurentskih rješenja na tržištu}
+\label{table:konkurencija}
+\begin{tabularx}{\textwidth}{|l|X|l|X|}
+\hline
+\textbf{Rješenje} & \textbf{Prednosti} & \textbf{Nedostaci} & \textbf{Geografski fokus} \\
+\hline
+Plodovi sela & Direktna prodaja bez posrednika; besplatna promocija proizvoda & Još nema online kupovine & Republika Srpska (BiH) \\
+\hline
+Farmer.ba & Veliki izbor (600+ proizvoda); detaljna baza podataka & Komercijalni troškovi; ograničeno na BiH & Bosna i Hercegovina \\
+\hline
+OPGburza.com & Jednostavno objedinjavanje ponude više OPG-ova & Minimalna narudžba često visoka & Hrvatska \\
+\hline
+Mali proizvođači & Velika zajednica (150,000+ članova); edukacije & Potrebna članarina; aktivni samo u Srbiji & Srbija \\
+\hline
+Meat Your Farmer & Inovativni model pretplate; 100\% domaći proizvodi & Ograničen na mesne proizvode; dugo čekanje & Srbija \\
+\hline
+Seosko blago & Raznovrstan asortiman tradicionalnih proizvoda & Fokus na gotove (ne svježe) proizvode & Srbija \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Segmentacija korisnika}
+
+Identificirane su dvije primarne skupine korisnika:
+
+\begin{itemize}
+    \item \textbf{Proizvođači}: Mali i srednji poljoprivredni proizvođači, OPG-ovi, poljoprivredne zadruge, koji traže direktan pristup tržištu i pravednije cijene.
+    \item \textbf{Kupci}: Pojedinci i domaćinstva u urbanim sredinama koji traže svježe i kvalitetne proizvode, restorani i ugostiteljski objekti fokusirani na lokalnu hranu, te kompanije s programima društvene odgovornosti.
+\end{itemize}
+
+% ----------------------------------------------------
+\section{Opis AgroLink rješenja}
+\label{sec:opis-rjesenja}
+
+\subsection{Vizija i ključni ciljevi}
+
+AgroLink je zamišljen kao sveobuhvatna platforma koja nadilazi jednostavnu e-trgovinu poljoprivrednih proizvoda, već stvara ekosistem koji podržava cijeli lanac vrijednosti od proizvodnje do konzumacije.
+
+\textbf{Ključni ciljevi:}
+\begin{itemize}
+    \item Povećanje profitabilnosti malih i srednjih proizvođača za najmanje 25\%
+    \item Smanjenje cijene svježih proizvoda za krajnje kupce za 10-15\%
+    \item Digitalizacija najmanje 30\% ruralnih poljoprivrednih proizvođača u regiji
+    \item Smanjenje rasipanja hrane u lancu opskrbe za 20\%
+    \item Stvaranje održivog poslovnog modela s pozitivnim društvenim učinkom
+\end{itemize}
+
+\subsection{Funkcionalnosti platforme}
+
+AgroLink platforma objedinjuje nekoliko ključnih funkcionalnosti:
+
+\begin{enumerate}
+    \item \textbf{Digitalna tržnica} - Centralno mjesto za direktnu prodaju poljoprivrednih proizvoda
+    \item \textbf{Sistem naručivanja i isporuke} - Integrirano praćenje narudžbi od proizvođača do kupca
+    \item \textbf{Prediktivna analitika} - Predviđanje ponude i potražnje bazirana na sezonalnosti i povijesnim podacima
+    \item \textbf{Alati za proizvođače} - Savjeti o uzgoju, predviđanje cijena, analiza tržišta
+    \item \textbf{Analitika za općine i institucije} - Podaci o proizvođačima i kulturama za informirano donošenje odluka
+    \item \textbf{Sistem ocjenjivanja i recenzija} - Transparentnost kvalitete i poticaj za kontinuirano unapređenje
+\end{enumerate}
+
+\subsection{Tehnička specifikacija i arhitektura}
+
+AgroLink će biti razvijen kao cloud-bazirano rješenje s web i mobilnim aplikacijama, koristeći:
+
+\begin{itemize}
+    \item \textbf{Frontend}: React.js i React Native za web i mobilne aplikacije
+    \item \textbf{Backend}: Node.js s Express.js frameworkom
+    \item \textbf{Baza podataka}: MongoDB za fleksibilnost podatkovnog modela
+    \item \textbf{Cloud infrastruktura}: AWS za skalabilnost i pouzdanost
+    \item \textbf{Analytics}: Kombinacija TensorFlow za prediktivne modele i PowerBI za poslovnu analitiku
+    \item \textbf{Integracije}: Open API za povezivanje s logističkim partnerima, sistemima plaćanja i vanjskim izvorima podataka
+\end{itemize}
+
+% ----------------------------------------------------
+\section{Poslovni model}
+\label{sec:poslovni-model}
+
+\subsection{Izvori prihoda}
+
+AgroLink će koristiti kombinaciju izvora prihoda:
+
+\begin{enumerate}
+    \item \textbf{Transakcijska provizija} (5-7\% po transakciji) - Primarna metoda monetizacije
+    \item \textbf{Premium članarine za proizvođače} (15€/mjesečno) - Za dodatne funkcionalnosti poput marketinga, analitike i prioritetnog rangiranja
+    \item \textbf{Institucionalne pretplate} (50-500€/mjesečno) - Za općine, poljoprivredne komore i istraživačke institucije
+    \item \textbf{Logističke usluge} (fiksna naknada po dostavi) - Za organizaciju transporta proizvoda
+    \item \textbf{Premium oglašavanje} (po prikazivanju/kliku) - Za partnere i eksterne oglašivače
+\end{enumerate}
+
+\subsection{Projekcija troškova}
+
+\begin{table}[H]
+\centering
+\caption{Procijenjeni troškovi razvoja i operacija}
+\begin{tabularx}{\textwidth}{|l|X|r|}
+\hline
+\textbf{Kategorija troška} & \textbf{Opis} & \textbf{Iznos (€)} \\
+\hline
+Razvoj platforme & Dizajn, razvoj, testiranje i implementacija inicijalnog rješenja & 120.000 \\
+\hline
+Marketing & Akvizicija korisnika, brendiranje, kampanje & 50.000 \\
+\hline
+Operativni troškovi (godišnji) & Hostanje, održavanje, podrška korisnicima & 60.000 \\
+\hline
+Ljudski resursi (godišnji) & Tim za razvoj, podršku i poslovanje (5 zaposlenih) & 150.000 \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Projekcija prihoda i povrata investicije}
+
+\begin{table}[H]
+\centering
+\caption{Projekcija prihoda po godinama}
+\begin{tabularx}{\textwidth}{|l|r|r|r|r|r|}
+\hline
+\textbf{Izvor prihoda} & \textbf{Godina 1} & \textbf{Godina 2} & \textbf{Godina 3} & \textbf{Godina 4} & \textbf{Godina 5} \\
+\hline
+Transakcijske provizije & 40.000€ & 120.000€ & 250.000€ & 400.000€ & 600.000€ \\
+\hline
+Premium članarine & 18.000€ & 42.000€ & 90.000€ & 150.000€ & 210.000€ \\
+\hline
+Institucionalne pretplate & 15.000€ & 30.000€ & 60.000€ & 90.000€ & 120.000€ \\
+\hline
+Logističke usluge & 10.000€ & 30.000€ & 50.000€ & 80.000€ & 120.000€ \\
+\hline
+Oglašavanje & 5.000€ & 15.000€ & 35.000€ & 60.000€ & 100.000€ \\
+\hline
+\textbf{Ukupno} & \textbf{88.000€} & \textbf{237.000€} & \textbf{485.000€} & \textbf{780.000€} & \textbf{1.150.000€} \\
+\hline
+\end{tabularx}
+\end{table}
+
+Očekivani povrat investicije (ROI) je 24 mjeseca od lansiranja, s tačkom pokrića (break-even point) krajem druge godine poslovanja. Dugoročna interna stopa povrata (IRR) procjenjuje se na 42\%.
+
+% ----------------------------------------------------
+\section{Implementacijski plan}
+\label{sec:implementacijski-plan}
+
+\subsection{Faze razvoja}
+
+Implementacija AgroLink platforme odvijat će se u tri glavne faze:
+
+\begin{enumerate}
+    \item \textbf{Faza 1: MVP (6 mjeseci)} - Razvoj osnovnog skupa funkcionalnosti 
+    \begin{itemize}
+        \item Registracija proizvođača i kupaca
+        \item Katalog proizvoda i online narudžbe
+        \item Osnovna analitika i izvještavanje
+        \item Testiranje s ograničenom grupom korisnika u dvije regije (BiH i Srbija)
+    \end{itemize}
+    
+    \item \textbf{Faza 2: Ekspanzija (12 mjeseci)} - Proširenje funkcionalnosti i tržišta
+    \begin{itemize}
+        \item Integracija s logističkim partnerima
+        \item Napredna analitika i prediktivni modeli
+        \item Mobilne aplikacije za Android i iOS
+        \item Proširenje na Hrvatsku i Crnu Goru
+    \end{itemize}
+    
+    \item \textbf{Faza 3: Napredne funkcionalnosti (18+ mjeseci)} - Kompletan ekosistem
+    \begin{itemize}
+        \item AI-podržani savjeti za proizvodnju
+        \item Integracija s općinskim i institucionalnim partnerima
+        \item Regionalne i sezonske marketinške kampanje
+        \item Proširenje na ostale zemlje Zapadnog Balkana
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Rizici i strategije ublažavanja}
+
+\begin{table}[H]
+\centering
+\caption{Identificirani rizici i strategije ublažavanja}
+\begin{tabularx}{\textwidth}{|l|l|X|}
+\hline
+\textbf{Rizik} & \textbf{Vjerojatnost/Utjecaj} & \textbf{Strategija ublažavanja} \\
+\hline
+Niska stopa usvajanja kod proizvođača & Visoka/Visok & Program edukacije i podrške; besplatno korištenje u prvoj godini; partnerstva sa zadrugama \\
+\hline
+Logistički izazovi u ruralnim područjima & Visoka/Srednji & Partnerstvo s lokalnim dostavnim službama; grupiranje narudžbi; click-and-collect opcije \\
+\hline
+Konkurencija velikih igrača (npr. Amazon) & Srednja/Visok & Fokus na lokalnost i autentičnost; duboko razumijevanje specifičnih lokalnih potreba \\
+\hline
+Regulatorni izazovi u različitim zemljama & Srednja/Srednji & Pravni savjetnici u svakoj zemlji; modularni pristup usklađen s lokalnim zakonima \\
+\hline
+Nepovjerenje kupaca prema online kupovini hrane & Visoka/Srednji & Garancija kvalitete i svježine; transparentan sistem ocjenjivanja; probni period \\
+\hline
+\end{tabularx}
+\end{table}
+
+% ----------------------------------------------------
+\section{Očekivani utjecaji}
+\label{sec:ocekivani-utjecaji}
+
+\subsection{Ekonomski utjecaji}
+\begin{itemize}
+    \item Povećanje prihoda za male i srednje poljoprivredne proizvođače za 25-40\%
+    \item Stvaranje 50+ direktnih i 500+ indirektnih radnih mjesta u ruralnim područjima
+    \item Smanjenje gubitaka u lancu opskrbe za 20\% kroz optimizaciju logistike
+\end{itemize}
+
+\subsection{Društveni utjecaji}
+\begin{itemize}
+    \item Poboljšanje vještina digitalne pismenosti kod najmanje 5.000 poljoprivrednika
+    \item Povećanje dostupnosti svježih i lokalnih proizvoda u urbanim središtima
+    \item Jačanje veza između ruralnih i urbanih zajednica
+\end{itemize}
+
+\subsection{Ekološki utjecaji}
+\begin{itemize}
+    \item Smanjenje transportnih distanci za 40\% kroz lokaliziranu distribuciju
+    \item Reduciranje emisije CO₂ za približno 1.500 tona godišnje
+    \item Poticanje održivih poljoprivrednih praksi kroz povećanu transparentnost
+\end{itemize}
+
+% ----------------------------------------------------
+\section{Zaključak i preporuke}
+\label{sec:zakljucak}
+
+Analiza tržišta i konkurencije pokazuje značajnu priliku za AgroLink platformu u regiji Zapadnog Balkana. Trenutna fragmentacija tržišta, nepostojanje sveobuhvatnog regionalnog rješenja, i rastući trend potrošačkih preferencija prema lokalnim i svježim proizvodima stvaraju idealne uvjete za implementaciju predloženog rješenja.
+
+Preporučuje se:
+\begin{enumerate}
+    \item Pokretanje MVP faze s fokusom na BiH i Srbiju kao testna tržišta
+    \item Partnerstvo s min. 3 poljoprivredne zadruge u svakoj zemlji za osiguravanje inicijalne ponude
+    \item Osiguravanje inicijalnog financiranja od 200.000€ kroz kombinaciju investicija i grant sredstava
+    \item Formiranje multidisciplinarnog tima s iskustvom u agrotech i e-commerce sektorima
+\end{enumerate}
+
+Uz strateški pristup implementaciji i adekvatno adresiranje identificiranih rizika, AgroLink ima potencijal postati vodeća digitalna platforma za poljoprivredne proizvode u regiji, stvarajući značajnu poslovnu vrijednost uz istovremeno generiranje pozitivnih društvenih i ekoloških utjecaja.
+
+% ----------------------------------------------------
+\begin{thebibliography}{99}
+\bibitem{FAO2021} Food and Agriculture Organization (2021). \textit{Digital agriculture report: Rural e-commerce development experience in China}. FAO i ITU.
+\bibitem{WorldBank2022} World Bank (2022). \textit{Agriculture Digitalization in Eastern Europe and Central Asia}. Washington, D.C.
+\bibitem{EU2023} European Commission (2023). \textit{Farm to Fork Strategy}. Brussels.
+\end{thebibliography}
+
+\end{document}
